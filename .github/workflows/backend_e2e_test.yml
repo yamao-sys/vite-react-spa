@@ -1,0 +1,62 @@
+name: backend_e2e_test
+
+on:
+  pull_request:
+    paths:
+      - 'api_server/app/prisma/schema.prisma'
+      - 'api_server/app/**/*.ts'
+      - 'api_server/app/test/**/*.ts'
+      - 'api_server/app/package.json'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0.28
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: vite_react_spa_test
+          TZ: 'Asia/Tokyo'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Prepare storage directory
+        working-directory: ./api_server/app
+        run: mkdir data/ && mkdir data/vite_react_spa_dev
+
+      - name: Set up google cloud server
+        uses: fsouza/fake-gcs-action@v0.4.1
+        with:
+          version: '1.37.2'
+          backend: memory
+          data: './api_server/app/data'
+          public-host: 'gcs:4443'
+          external-url: 'http://gcs:4443'
+          scheme: http
+
+      - name: Add GCS to /etc/hosts
+        run: echo "127.0.0.1 gcs" | sudo tee -a /etc/hosts
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./api_server/app
+        run: npm install
+
+      - name: Run E2E tests
+        working-directory: ./api_server/app
+        env:
+          IS_CI: true
+          BOOKS_API_ENDPOINT: ${{ secrets.BOOKS_API_ENDPOINT }}
+          BOOKS_API_APPLICATION_ID: ${{ secrets.BOOKS_API_APPLICATION_ID }}
+        run: |
+          npm run test:e2e

@@ -1,0 +1,19 @@
+description: 読書記録作成のrequest DTO
+type: object
+properties:
+  title:
+    type: string
+  author:
+    type: string
+    nullable: true
+  bookImage:
+    type: string
+    nullable: true
+  learnedContent:
+    type: string
+    nullable: true
+  impression:
+    type: string
+    nullable: true
+required:
+  - title

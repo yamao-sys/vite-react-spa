@@ -1,0 +1,7 @@
+description: 読書記録の作成のレスポンスDTO
+type: object
+properties:
+  readingRecord:
+    $ref: './reading_record.dto.yml'
+required:
+  - readingRecord

@@ -1,0 +1,7 @@
+description: 会員登録のレスポンスDTO
+type: object
+properties:
+  result:
+    type: boolean
+required:
+  - result

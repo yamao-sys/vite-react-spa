@@ -1,0 +1,13 @@
+description: 書籍検索結果のDTO
+type: object
+properties:
+  title:
+    type: string
+  author:
+    type: string
+  bookImageUrl:
+    type: string
+required:
+  - title
+  - author
+  - bookImageUrl

@@ -1,0 +1,24 @@
+description: 会員登録のバリデーションチェックのレスポンスDTO
+type: object
+properties:
+  errors:
+    type: object
+    properties:
+      name:
+        type: array
+        items:
+          type: string
+      email:
+        type: array
+        items:
+          type: string
+      password:
+        type: array
+        items:
+          type: string
+      passwordConfirm:
+        type: array
+        items:
+          type: string
+required:
+  - errors

@@ -1,0 +1,4 @@
+description: 読書記録の作成のレスポンスDTO
+type: array
+items:
+  $ref: './reading_record.dto.yml'
