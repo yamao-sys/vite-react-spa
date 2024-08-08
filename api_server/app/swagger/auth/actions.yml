@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Auth Controller Schema
+  version: 1.0.0
+
+paths:
+  /auth/validateSignUp:
+    post:
+      operationId: validateSignUp
+      description: 会員登録のバリデーションチェック
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDto'
+      responses:
+        '201':
+          description: バリデーションチェック成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateSignUpResponseDto'
+        '400':
+          $ref: '../errors.yml#responses/400'
+  /auth/signUp:
+    post:
+      operationId: signUp
+      description: 会員登録実行
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDto'
+      responses:
+        '201':
+          description: 会員登録成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponseDto'
+        '400':
+          $ref: '../errors.yml#responses/400'
+  /auth/signIn:
+    post:
+      operationId: signIn
+      description: ログイン
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInDto'
+      responses:
+        '200':
+          description: ログイン成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponseDto'
+  /auth/checkSignedIn:
+    get:
+      operationId: checkSignedIn
+      description: 認証済みかどうかをチェック
+      parameters: []
+      responses:
+        '200':
+          description: 認証済みかどうかチェック成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/checkSignedInResponseDto'
+
+components:
+  schemas:
+    SignUpDto:
+      $ref: './components/sign_up.dto.yml'
+    ValidateSignUpResponseDto:
+      $ref: './components/validate_sign_up_response.dto.yml'
+    SignUpResponseDto:
+      $ref: './components/sign_up_response.dto.yml'
+    SignInDto:
+      $ref: './components/sign_in.dto.yml'
+    SignInResponseDto:
+      $ref: './components/sign_in_response.dto.yml'
+    checkSignedInResponseDto:
+      $ref: './components/check_signed_in_response.dto.yml'

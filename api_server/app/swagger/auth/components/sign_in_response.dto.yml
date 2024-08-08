@@ -1,0 +1,10 @@
+description: ログインのレスポンス
+type: object
+properties:
+  errors:
+    type: array
+    items:
+      description: バリデーションエラーメッセージ
+      type: string
+required:
+  - errors

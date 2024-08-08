@@ -1,0 +1,4 @@
+description: 書籍情報検索のレスポンスDTO
+type: array
+items:
+  $ref: './search_books_result.dto.yml'

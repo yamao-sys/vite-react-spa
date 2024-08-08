@@ -1,0 +1,546 @@
+openapi: 3.0.0
+info:
+  title: Reading Records Controller Schema
+  version: 1.0.0
+paths:
+  /readingRecords:
+    post:
+      operationId: createReadingRecords
+      description: 読書記録の作成
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReadingRecordDto'
+      responses:
+        '201':
+          description: 読書記録の作成成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReadingRecordResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: バリデーションエラーのレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+    get:
+      operationId: fetchAllReadingRecords
+      description: 読書記録の一覧取得
+      parameters: []
+      responses:
+        '200':
+          description: 読書記録の一覧取得成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchAllReadingRecordResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: バリデーションエラーのレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '404':
+          description: Not Foundエラー
+          content:
+            application/json:
+              schema:
+                description: Not Foundエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+  /readingRecords/{id}:
+    get:
+      operationId: fetchReadingRecord
+      description: 読書記録の取得
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 読書記録の取得成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchReadingRecordResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: バリデーションエラーのレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '404':
+          description: Not Foundエラー
+          content:
+            application/json:
+              schema:
+                description: Not Foundエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+    patch:
+      operationId: updateReadingRecord
+      description: 読書記録の更新
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReadingRecordDto'
+      responses:
+        '200':
+          description: 読書記録の更新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReadingRecordResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: バリデーションエラーのレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '404':
+          description: Not Foundエラー
+          content:
+            application/json:
+              schema:
+                description: Not Foundエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+    delete:
+      operationId: deleteReadingRecord
+      description: 読書記録の削除
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 読書記録の削除成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReadingRecordResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: バリデーションエラーのレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '404':
+          description: Not Foundエラー
+          content:
+            application/json:
+              schema:
+                description: Not Foundエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+components:
+  schemas:
+    ReadingRecordDto:
+      description: 読書記録のDTO
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date
+      required:
+        - id
+        - title
+        - author
+        - bookImage
+        - learnedContent
+        - impression
+        - createdAt
+    CreateReadingRecordDto:
+      description: 読書記録作成のrequest DTO
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+      required:
+        - title
+    CreateReadingRecordResponseDto:
+      description: 読書記録の作成のレスポンスDTO
+      type: object
+      properties:
+        readingRecord:
+          description: 読書記録のDTO
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            author:
+              type: string
+              nullable: true
+            bookImage:
+              type: string
+              nullable: true
+            learnedContent:
+              type: string
+              nullable: true
+            impression:
+              type: string
+              nullable: true
+            createdAt:
+              type: string
+              format: date
+          required:
+            - id
+            - title
+            - author
+            - bookImage
+            - learnedContent
+            - impression
+            - createdAt
+      required:
+        - readingRecord
+    FetchAllReadingRecordResponseDto:
+      description: 読書記録の作成のレスポンスDTO
+      type: array
+      items:
+        description: 読書記録のDTO
+        type: object
+        properties:
+          id:
+            type: string
+          title:
+            type: string
+          author:
+            type: string
+            nullable: true
+          bookImage:
+            type: string
+            nullable: true
+          learnedContent:
+            type: string
+            nullable: true
+          impression:
+            type: string
+            nullable: true
+          createdAt:
+            type: string
+            format: date
+        required:
+          - id
+          - title
+          - author
+          - bookImage
+          - learnedContent
+          - impression
+          - createdAt
+    FetchReadingRecordResponseDto:
+      description: 読書記録のDTO
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date
+      required:
+        - id
+        - title
+        - author
+        - bookImage
+        - learnedContent
+        - impression
+        - createdAt
+    UpdateReadingRecordDto:
+      description: 読書記録更新のrequest DTO
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+      required:
+        - title
+        - author
+        - learnedContent
+        - impression
+    UpdateReadingRecordResponseDto:
+      description: 読書記録のDTO
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date
+      required:
+        - id
+        - title
+        - author
+        - bookImage
+        - learnedContent
+        - impression
+        - createdAt
+    DeleteReadingRecordResponseDto:
+      description: 読書記録の削除のレスポンスDTO
+      type: object
+      properties:
+        result:
+          type: boolean
+      required:
+        - result

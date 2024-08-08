@@ -1,0 +1,7 @@
+description: 読書記録の削除のレスポンスDTO
+type: object
+properties:
+  result:
+    type: boolean
+required:
+  - result

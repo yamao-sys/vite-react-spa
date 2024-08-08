@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Reading Records Controller Schema
+  version: 1.0.0
+paths:
+  /searchBooks:
+    get:
+      operationId: searchBooks
+      description: 書籍情報検索
+      parameters:
+        - name: keyword
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 読書記録の一覧取得成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchBooksResponseDto'
+        '401':
+          description: 認証エラー
+          content:
+            application/json:
+              schema:
+                description: 認証エラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+components:
+  schemas:
+    SearchBooksResponseDto:
+      description: 書籍情報検索のレスポンスDTO
+      type: array
+      items:
+        description: 書籍検索結果のDTO
+        type: object
+        properties:
+          title:
+            type: string
+          author:
+            type: string
+          bookImageUrl:
+            type: string
+        required:
+          - title
+          - author
+          - bookImageUrl
+    SearchBooksResultDto:
+      description: 書籍検索結果のDTO
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        bookImageUrl:
+          type: string
+      required:
+        - title
+        - author
+        - bookImageUrl

@@ -1,0 +1,61 @@
+responses:
+  '400':
+    description: バリデーションエラー
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/ValidationError'
+  '401':
+    description: 認証エラー
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Unauthorized'
+  '404':
+    description: Not Foundエラー
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/NotFound'
+
+components:
+  schemas:
+    ValidationError:
+      description: バリデーションエラー
+      type: object
+      properties:
+        statusCode:
+          type: number
+        message:
+          type: array
+          items:
+            description: バリデーションエラーのレスポンスのDTO
+            type: string
+        error:
+          type: string
+      required:
+        - statusCode
+        - message
+        - error
+    Unauthorized:
+      description: 認証エラー
+      type: object
+      properties:
+        statusCode:
+          type: number
+        message:
+          type: string
+      required:
+        - statusCode
+        - message
+    NotFound:
+      description: Not Foundエラー
+      type: object
+      properties:
+        statusCode:
+          type: number
+        message:
+          type: string
+      required:
+        - statusCode
+        - message
