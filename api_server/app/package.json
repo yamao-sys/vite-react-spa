@@ -17,7 +17,12 @@
     "test:watch": "npx dotenv -e .env.test -- jest --watch",
     "test:cov": "npx dotenv -e .env.test -- jest --coverage",
     "test:debug": "npx dotenv -e .env.test -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "npx dotenv -e .env.test -- jest --config ./test/jest-e2e.json"
+    "test:e2e": "npx dotenv -e .env.test -- jest --config ./test/jest-e2e.json",
+    "test:local": "npx dotenv -e .env.test.local -- jest",
+    "test:watch:local": "npx dotenv -e .env.test.local -- jest --watch",
+    "test:cov:local": "npx dotenv -e .env.test.local -- jest --coverage",
+    "test:debug:local": "npx dotenv -e .env.test.local -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e:local": "npx dotenv -e .env.test.local -- jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.11.2",
