@@ -1,0 +1,40 @@
+name: frontend_lint
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/src/**/*.{js,ts,tsx}'
+
+jobs:
+  eslint:
+    name: Frontend Lint
+    runs-on: ubuntu-latest
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./frontend/src
+        run: npm install
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
+
+      - name: Run tsc(type check) with reviewdog
+        run: cd ./frontend/src && npm run tsc | reviewdog -reporter=github-pr-review -f=tsc -filter-mode=nofilter -fail-on-error
+        shell: bash
+
+      - name: Run prettier
+        run: cd ./frontend/src && npm run lint:prettier
+        shell: bash
+
+      - name: Run eslint with reviewdog
+        run: cd ./frontend/src && npm run lint | reviewdog -reporter=github-pr-review -f=eslint -filter-mode=nofilter -fail-on-error
+        shell: bash
