@@ -31,12 +31,12 @@ services:
       - ./.data:/data/vite_react_spa_dev
       - ./.storage:/storage
     command: -scheme http -public-host ${URL:-localhost}:4443 -external-url http://${URL:-gcs}:4443 -port-http 8000
-  # frontend:
-  #   build: ./frontend
-  #   volumes:
-  #     - ./frontend/src:/src
-  #     - ./api_server/app/swagger:/src/swagger
-  #   ports:
-  #     - 5173:5173
-  #   tty: true
-  #   stdin_open: true
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/src:/src
+      - ./api_server/app/swagger:/src/swagger
+    ports:
+      - 5173:5173
+    tty: true
+    stdin_open: true
