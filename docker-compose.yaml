@@ -38,5 +38,6 @@ services:
       - ./api_server/app/swagger:/src/swagger
     ports:
       - 5173:5173
+      - 6006:6006
     tty: true
     stdin_open: true
