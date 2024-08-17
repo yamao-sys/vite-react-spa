@@ -15,4 +15,14 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
   },
+  overrides: {
+    files: '*.stories.@(ts|tsx|js)',
+    extends: ['plugin:storybook/recommended'],
+    rules: {
+      // default export を許可する
+      'import/no-default-export': off,
+      // devDependencies からの import を許可する
+      'import/no-extraneous-dependencies': off,
+    },
+  },
 };
