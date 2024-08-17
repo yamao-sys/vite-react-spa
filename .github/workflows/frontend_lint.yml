@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'frontend/src/**/*.{js,ts,tsx}'
+      - 'frontend/src/package.json'
 
 jobs:
   eslint:
