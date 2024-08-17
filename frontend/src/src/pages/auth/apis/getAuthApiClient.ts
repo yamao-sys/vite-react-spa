@@ -1,11 +1,11 @@
 import api from '@/apis/auth/$api';
-import aspida from '@aspida/fetch';
+import aspida, { FetchConfig } from '@aspida/fetch';
 
-export const getAuthApiClient = () => {
+export const getAuthApiClient = (options?: FetchConfig) => {
   const baseFetchConditions = {
     baseURL: import.meta.env.VITE_BASE_API_URL,
     throwHttpErrors: true,
   };
 
-  return api(aspida(fetch, { ...baseFetchConditions }));
+  return api(aspida(fetch, { ...baseFetchConditions, ...(options || {}) }));
 };
