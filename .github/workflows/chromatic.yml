@@ -1,0 +1,43 @@
+name: chromatic
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/src/src/components/**/*.tsx'
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/src/src/components/**/*.tsx'
+
+jobs:
+  chromatic-deployment:
+    name: Deploy Storybook to chromatic
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # 開発が進みリポジトリが巨大になると時間を要しそうなため、チューニングが要りそう
+
+      # 差分のチェック
+      - uses: technote-space/get-diff-action@v5
+        id: check-diff
+        with:
+          # 共通コンポーネントを対象とする
+          PATTERNS: |
+            frontend/src/src/components/**/*.tsx
+
+      - name: Install dependencies
+        if: steps.check-diff.outputs.diff
+        working-directory: ./frontend/src
+        run: npm ci
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        if: steps.check-diff.outputs.diff
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: ./frontend/src
