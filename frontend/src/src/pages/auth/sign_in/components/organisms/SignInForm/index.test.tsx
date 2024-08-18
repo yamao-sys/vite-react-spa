@@ -6,8 +6,8 @@ import SignInForm from './index.tsx';
 const user = userEvent.setup();
 
 const navigate = vi.hoisted(() => vi.fn());
-vi.mock('react-router-dom', () => {
-  const reactRouterDom = vi.importActual('react-router-dom');
+vi.mock('react-router-dom', async () => {
+  const reactRouterDom = await vi.importActual('react-router-dom');
   return {
     ...reactRouterDom,
     useNavigate: navigate,

@@ -25,7 +25,7 @@ fi
 
 input_schema_path="./swagger/$ENDPOINT/actions.yml"
 merged_schema_path="./swagger/$ENDPOINT/swagger.yml"
-generated_type_path="./src/apis/$ENDPOINT"
+generated_type_path="./src/generated/$ENDPOINT"
 
 # 指定のエンドポイントのスキーマファイルを統合
 npx swagger-merger -i $input_schema_path -o $merged_schema_path

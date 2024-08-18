@@ -1,4 +1,4 @@
-import { SignInDto } from '@/apis/auth/@types';
+import { SignInDto } from '@/generated/auth/@types';
 import { getAuthApiClient } from '../../apis/getAuthApiClient';
 
 export const postSignIn = async (data: SignInDto) => {

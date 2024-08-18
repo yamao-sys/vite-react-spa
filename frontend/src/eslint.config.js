@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config({
   extends: [js.configs.recommended, ...tseslint.configs.recommended],
   files: ['**/*.{ts,tsx}'],
-  ignores: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'vitest.config.ts', 'src/apis/**/*.ts'],
+  ignores: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'vitest.config.ts', 'src/generated/**/*.ts'],
   languageOptions: {
     ecmaVersion: 2020,
     globals: globals.browser,

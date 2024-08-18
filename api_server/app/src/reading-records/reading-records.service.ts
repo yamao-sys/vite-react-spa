@@ -3,6 +3,7 @@ import { CreateReadingRecordDto } from './dto/create-reading-record.dto';
 import { UpdateReadingRecordDto } from './dto/update-reading-record.dto';
 import { PrismaService } from 'src/prisma.service';
 import { GoogleCloudService } from 'src/google-cloud/google-cloud.service';
+import { ReadingRecord } from '@prisma/client';
 
 @Injectable()
 export class ReadingRecordsService {
@@ -23,10 +24,12 @@ export class ReadingRecordsService {
       createReadingRecordDto.bookImage,
       `book_image/${readingRecord.id}`,
     );
-    return await this.prisma.readingRecord.update({
+    const savedImageReadingRecord = await this.prisma.readingRecord.update({
       where: { id: readingRecord.id },
       data: { bookImage: filePath },
     });
+
+    return this.setBookImage(savedImageReadingRecord);
   }
 
   async findAll(userId: number) {
@@ -36,14 +39,9 @@ export class ReadingRecordsService {
     if (!readingRecords) return readingRecords;
 
     return Promise.all(
-      readingRecords.map(async (readingRecord) => {
-        if (!readingRecord.bookImage) return readingRecord;
-
-        readingRecord.bookImage = await this.googleCloud.downloadFromStorage(
-          readingRecord.bookImage,
-        );
-        return readingRecord;
-      }),
+      readingRecords.map(async (readingRecord) =>
+        this.setBookImage(readingRecord),
+      ),
     );
   }
 
@@ -57,12 +55,8 @@ export class ReadingRecordsService {
     if (!readingRecord) {
       throw new NotFoundException();
     }
-    if (!readingRecord.bookImage) return readingRecord;
 
-    readingRecord.bookImage = await this.googleCloud.downloadFromStorage(
-      readingRecord.bookImage,
-    );
-    return { ...readingRecord };
+    return this.setBookImage(readingRecord);
   }
 
   async update(
@@ -70,15 +64,25 @@ export class ReadingRecordsService {
     updateReadingRecordDto: UpdateReadingRecordDto,
     userId: number,
   ) {
-    return await this.prisma.readingRecord.update({
+    const updatedReadingRecord = await this.prisma.readingRecord.update({
       where: { id, userId },
       data: updateReadingRecordDto,
     });
+    return this.setBookImage(updatedReadingRecord);
   }
 
   async remove(id: number, userId: number) {
     return await this.prisma.readingRecord.delete({
       where: { id, userId },
     });
+  }
+
+  private async setBookImage(readingRecord: ReadingRecord) {
+    if (!readingRecord.bookImage) return readingRecord;
+
+    readingRecord.bookImage = await this.googleCloud.downloadFromStorage(
+      readingRecord.bookImage,
+    );
+    return readingRecord;
   }
 }

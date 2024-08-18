@@ -381,42 +381,36 @@ components:
       required:
         - title
     CreateReadingRecordResponseDto:
-      description: 読書記録の作成のレスポンスDTO
+      description: 読書記録のDTO
       type: object
       properties:
-        readingRecord:
-          description: 読書記録のDTO
-          type: object
-          properties:
-            id:
-              type: string
-            title:
-              type: string
-            author:
-              type: string
-              nullable: true
-            bookImage:
-              type: string
-              nullable: true
-            learnedContent:
-              type: string
-              nullable: true
-            impression:
-              type: string
-              nullable: true
-            createdAt:
-              type: string
-              format: date
-          required:
-            - id
-            - title
-            - author
-            - bookImage
-            - learnedContent
-            - impression
-            - createdAt
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+          nullable: true
+        bookImage:
+          type: string
+          nullable: true
+        learnedContent:
+          type: string
+          nullable: true
+        impression:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date
       required:
-        - readingRecord
+        - id
+        - title
+        - author
+        - bookImage
+        - learnedContent
+        - impression
+        - createdAt
     FetchAllReadingRecordResponseDto:
       description: 読書記録の作成のレスポンスDTO
       type: array
@@ -489,9 +483,6 @@ components:
         title:
           type: string
         author:
-          type: string
-          nullable: true
-        bookImage:
           type: string
           nullable: true
         learnedContent:
