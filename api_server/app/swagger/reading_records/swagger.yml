@@ -334,7 +334,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         title:
           type: string
         author:
@@ -385,7 +385,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         title:
           type: string
         author:
@@ -419,7 +419,7 @@ components:
         type: object
         properties:
           id:
-            type: string
+            type: integer
           title:
             type: string
           author:
@@ -450,7 +450,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         title:
           type: string
         author:
@@ -501,7 +501,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         title:
           type: string
         author:

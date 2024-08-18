@@ -10,7 +10,7 @@ const useReadingRecordContext = vi.hoisted(() =>
   vi.fn(() => ({
     readingRecords: [
       {
-        id: '1',
+        id: 1,
         title: 'test_title_1',
         author: 'test_author_1',
         bookImage: 'https://emample.com/test_1.png',

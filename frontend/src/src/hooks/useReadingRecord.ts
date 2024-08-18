@@ -33,7 +33,7 @@ export const useReadingRecord = () => {
     async (id: string, inputReadingRecord: UpdateReadingRecordDto) => {
       const res = await updateReadingRecord(id, inputReadingRecord);
       const newReadingRecords = readingRecords.map((readingRecord) =>
-        Number(readingRecord.id) === Number(id) ? res : readingRecord,
+        readingRecord.id === Number(id) ? res : readingRecord,
       );
 
       setReadingRecords(newReadingRecords);

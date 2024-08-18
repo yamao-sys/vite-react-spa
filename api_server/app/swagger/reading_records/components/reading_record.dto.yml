@@ -2,7 +2,7 @@ description: 読書記録のDTO
 type: object
 properties:
   id:
-    type: string
+    type: integer
   title:
     type: string
   author:
