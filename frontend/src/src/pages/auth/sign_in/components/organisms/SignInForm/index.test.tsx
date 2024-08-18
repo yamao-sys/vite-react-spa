@@ -15,8 +15,8 @@ vi.mock('react-router-dom', async () => {
 });
 
 const postSignIn = vi.hoisted(() => vi.fn(() => ({ errors: [''] })));
-vi.mock('../../../apis/signInApi', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('../../../apis/signInApi')>();
+vi.mock('@/apis/authApi', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@/apis/authApi')>();
   return {
     ...mod,
     postSignIn,

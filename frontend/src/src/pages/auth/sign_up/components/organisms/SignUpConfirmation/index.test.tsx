@@ -25,8 +25,8 @@ vi.mock('../../../contexts/SignUpContext', async (importOriginal) => {
 });
 
 const postSignUp = vi.hoisted(() => vi.fn(() => true));
-vi.mock('../../../apis/signUpApi', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('../../../apis/signUpApi')>();
+vi.mock('@/apis/authApi', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@/apis/authApi')>();
   return {
     ...mod,
     postSignUp,

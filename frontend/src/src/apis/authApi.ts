@@ -1,5 +1,5 @@
 import api from '@/generated/auth/$api';
-import { SignUpDto } from '@/generated/auth/@types';
+import { SignInDto, SignUpDto } from '@/generated/auth/@types';
 import aspida, { FetchConfig } from '@aspida/fetch';
 
 const getAuthApiClient = (options?: FetchConfig) => {
@@ -35,6 +35,17 @@ export const postSignUp = async (data: SignUpDto) => {
   });
 
   return { result: response.body.result };
+};
+
+export const postSignIn = async (data: SignInDto) => {
+  const response = await getAuthApiClient({ credentials: 'include' }).auth.signIn.post({
+    body: {
+      email: data.email,
+      password: data.password,
+    },
+  });
+
+  return response.body;
 };
 
 export const checkSignedIn = async () => {
