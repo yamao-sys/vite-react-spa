@@ -1,6 +1,6 @@
 import aspida from '@aspida/fetch';
 import api from '@/generated/reading_records/$api';
-import { CreateReadingRecordDto } from '@/generated/reading_records/@types';
+import { CreateReadingRecordDto, UpdateReadingRecordDto } from '@/generated/reading_records/@types';
 
 const getReadingRecordApiClient = () => {
   const baseFetchConditions = {
@@ -17,6 +17,15 @@ export const fetchReadingRecords = async () => {
 
 export const postCreateReadingRecord = async (inputReadingRecord: CreateReadingRecordDto) => {
   return await getReadingRecordApiClient().readingRecords.$post({
+    body: inputReadingRecord,
+  });
+};
+
+export const updateReadingRecord = async (
+  id: string,
+  inputReadingRecord: UpdateReadingRecordDto,
+) => {
+  return await getReadingRecordApiClient().readingRecords._id(id).$patch({
     body: inputReadingRecord,
   });
 };

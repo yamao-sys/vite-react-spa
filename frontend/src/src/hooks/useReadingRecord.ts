@@ -1,10 +1,15 @@
-import { CreateReadingRecordDto, ReadingRecordDto } from '@/generated/reading_records/@types';
+import {
+  CreateReadingRecordDto,
+  ReadingRecordDto,
+  UpdateReadingRecordDto,
+} from '@/generated/reading_records/@types';
 import { useCallback, useEffect, useState } from 'react';
 import { useAuthContext } from '@/contexts/AuthContext';
 import {
   deleteReadingRecord,
   fetchReadingRecords,
   postCreateReadingRecord,
+  updateReadingRecord,
 } from '@/apis/readingRecordsApi';
 
 export const useReadingRecord = () => {
@@ -14,14 +19,26 @@ export const useReadingRecord = () => {
   const handleFetchReadingRecords = useCallback(async () => {
     const data = await fetchReadingRecords();
     setReadingRecords(data);
-  }, [setReadingRecords]);
+  }, []);
 
   const handleCreateReadingRecord = useCallback(
     async (inputReadingRecord: CreateReadingRecordDto) => {
       const res = await postCreateReadingRecord(inputReadingRecord);
       setReadingRecords([...readingRecords, res]);
     },
-    [readingRecords, setReadingRecords],
+    [readingRecords],
+  );
+
+  const handleUpdateReadingRecord = useCallback(
+    async (id: string, inputReadingRecord: UpdateReadingRecordDto) => {
+      const res = await updateReadingRecord(id, inputReadingRecord);
+      const newReadingRecords = readingRecords.map((readingRecord) =>
+        Number(readingRecord.id) === Number(id) ? res : readingRecord,
+      );
+
+      setReadingRecords(newReadingRecords);
+    },
+    [readingRecords],
   );
 
   const handleDeleteReadingRecord = useCallback(
@@ -33,7 +50,7 @@ export const useReadingRecord = () => {
       );
       setReadingRecords(newReadingRecords);
     },
-    [readingRecords, setReadingRecords],
+    [readingRecords],
   );
 
   useEffect(() => {
@@ -43,6 +60,7 @@ export const useReadingRecord = () => {
   return {
     readingRecords,
     handleCreateReadingRecord,
+    handleUpdateReadingRecord,
     handleDeleteReadingRecord,
   };
 };

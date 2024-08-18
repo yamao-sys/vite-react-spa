@@ -1,10 +1,18 @@
 import { ReactNode, createContext, useContext } from 'react';
 import { useReadingRecord } from '../hooks/useReadingRecord';
-import { CreateReadingRecordDto, ReadingRecordDto } from '@/generated/reading_records/@types';
+import {
+  CreateReadingRecordDto,
+  ReadingRecordDto,
+  UpdateReadingRecordDto,
+} from '@/generated/reading_records/@types';
 
 type ReadingRecordContextType = {
   readingRecords: ReadingRecordDto[];
   handleCreateReadingRecord: (inputReadingRecord: CreateReadingRecordDto) => Promise<void>;
+  handleUpdateReadingRecord: (
+    id: string,
+    inputReadingRecord: UpdateReadingRecordDto,
+  ) => Promise<void>;
   handleDeleteReadingRecord: (id: string) => Promise<void>;
 };
 
@@ -15,14 +23,19 @@ type Props = {
 };
 
 export const ReadingRecordProvider = ({ children }: Props) => {
-  const { readingRecords, handleCreateReadingRecord, handleDeleteReadingRecord } =
-    useReadingRecord();
+  const {
+    readingRecords,
+    handleCreateReadingRecord,
+    handleUpdateReadingRecord,
+    handleDeleteReadingRecord,
+  } = useReadingRecord();
 
   return (
     <ReadingRecordContext.Provider
       value={{
         readingRecords,
         handleCreateReadingRecord,
+        handleUpdateReadingRecord,
         handleDeleteReadingRecord,
       }}
     >
