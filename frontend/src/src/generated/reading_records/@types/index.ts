@@ -1,7 +1,7 @@
 /* eslint-disable */
 /** 読書記録のDTO */
 export type ReadingRecordDto = {
-  id: string;
+  id: number;
   title: string;
   author: string | null;
   bookImage: string | null;
@@ -21,7 +21,7 @@ export type CreateReadingRecordDto = {
 
 /** 読書記録のDTO */
 export type CreateReadingRecordResponseDto = {
-  id: string;
+  id: number;
   title: string;
   author: string | null;
   bookImage: string | null;
@@ -32,7 +32,7 @@ export type CreateReadingRecordResponseDto = {
 
 /** 読書記録の作成のレスポンスDTO */
 export type FetchAllReadingRecordResponseDto = {
-  id: string;
+  id: number;
   title: string;
   author: string | null;
   bookImage: string | null;
@@ -43,7 +43,7 @@ export type FetchAllReadingRecordResponseDto = {
 
 /** 読書記録のDTO */
 export type FetchReadingRecordResponseDto = {
-  id: string;
+  id: number;
   title: string;
   author: string | null;
   bookImage: string | null;
@@ -62,7 +62,7 @@ export type UpdateReadingRecordDto = {
 
 /** 読書記録のDTO */
 export type UpdateReadingRecordResponseDto = {
-  id: string;
+  id: number;
   title: string;
   author: string | null;
   bookImage: string | null;

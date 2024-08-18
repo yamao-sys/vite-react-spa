@@ -20,7 +20,7 @@ export const ReadingRecordEdit = () => {
   if (!targetId) throw new Error('Invalid Param');
 
   const targetReadingRecord = useMemo(
-    () => readingRecords.find((readingRecord) => Number(readingRecord.id) === Number(targetId)),
+    () => readingRecords.find((readingRecord) => readingRecord.id === Number(targetId)),
     [readingRecords, targetId],
   );
   if (!targetReadingRecord) throw new Error('Not Found Reading Record');
