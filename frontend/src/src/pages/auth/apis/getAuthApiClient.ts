@@ -1,4 +1,4 @@
-import api from '@/apis/auth/$api';
+import api from '@/generated/auth/$api';
 import aspida, { FetchConfig } from '@aspida/fetch';
 
 export const getAuthApiClient = (options?: FetchConfig) => {

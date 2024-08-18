@@ -1,4 +1,4 @@
-import { SignInResponseDto } from '@/apis/auth/@types';
+import { SignInResponseDto } from '@/generated/auth/@types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postSignIn } from '../../../apis/signInApi';
@@ -39,8 +39,8 @@ export default function SignInForm() {
         setValidationErrors(response);
         setInputPassword('');
       } else {
-        // TODO: 読書記録TOPページにする
-        navigate(NAVIGATION_LIST.top);
+        console.log('signed');
+        navigate(NAVIGATION_LIST.readingRecords.list);
       }
     } catch (error) {
       // TODO: エラーハンドリング

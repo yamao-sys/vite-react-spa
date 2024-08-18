@@ -1,4 +1,4 @@
-import { SignUpDto } from '@/apis/auth/@types';
+import { SignUpDto } from '@/generated/auth/@types';
 import { getAuthApiClient } from '../../apis/getAuthApiClient';
 
 export const postValidateSignUp = async (data: SignUpDto) => {

@@ -6,7 +6,7 @@ import { SubmitButton } from '@/components/molecules/SubmitButton';
 import { ValidationErrors } from '@/components/molecules/ValidationErrors';
 import { useSignUpContext } from '../../../contexts/SignUpContext';
 import { PhaseType } from '../../../types';
-import { ValidateSignUpResponseDto } from '@/apis/auth/@types';
+import { ValidateSignUpResponseDto } from '@/generated/auth/@types';
 import { postValidateSignUp } from '../../../apis/signUpApi';
 
 type Props = {

@@ -1,4 +1,4 @@
-import { SignUpDto } from '@/apis/auth/@types';
+import { SignUpDto } from '@/generated/auth/@types';
 import { createContext, FC, useContext } from 'react';
 import { useSignUp } from '../hooks/useSignUp';
 
