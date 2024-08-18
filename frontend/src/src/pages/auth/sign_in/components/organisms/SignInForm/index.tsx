@@ -1,13 +1,13 @@
 import { SignInResponseDto } from '@/generated/auth/@types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postSignIn } from '../../../apis/signInApi';
 import { BaseLayout } from '@/pages/auth/sign_up/components/organisms/BaseLayout';
 import { ValidationErrors } from '@/components/molecules/ValidationErrors';
 import { BaseFormBox } from '@/components/atoms/BaseFormBox';
 import { InputForm } from '@/components/atoms/InputForm';
 import { SubmitButton } from '@/components/molecules/SubmitButton';
 import { NAVIGATION_LIST } from '@/constants/navigation';
+import { postSignIn } from '@/apis/authApi';
 
 const INITIAL_VALIDATION_ERRORS = {
   errors: [],
