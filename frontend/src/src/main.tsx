@@ -10,6 +10,7 @@ import { SignInPage } from './pages/auth/sign_in/index.tsx';
 import { NotFound } from './components/organisms/NotFound/index.tsx';
 import { ReadingRecordListsPage } from './pages/reading_records/lists/index.tsx';
 import { ReadingRecordCreatePage } from './pages/reading_records/new/index.tsx';
+import { ReadingRecordEditPage } from './pages/reading_records/edit/index.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -26,6 +27,10 @@ createRoot(document.getElementById('root')!).render(
           <Route
             path={NAVIGATION_LIST.readingRecords.new}
             element={<ReadingRecordCreatePage />}
+          ></Route>
+          <Route
+            path={NAVIGATION_LIST.readingRecords.edit}
+            element={<ReadingRecordEditPage />}
           ></Route>
           <Route path='/*' element={<NotFound />}></Route>
         </Routes>
