@@ -23,10 +23,15 @@ export class ReadingRecordsService {
       createReadingRecordDto.bookImage,
       `book_image/${readingRecord.id}`,
     );
-    return await this.prisma.readingRecord.update({
+    const savedImageReadingRecord = await this.prisma.readingRecord.update({
       where: { id: readingRecord.id },
       data: { bookImage: filePath },
     });
+    savedImageReadingRecord.bookImage =
+      await this.googleCloud.downloadFromStorage(
+        savedImageReadingRecord.bookImage || '',
+      );
+    return { ...savedImageReadingRecord };
   }
 
   async findAll(userId: number) {
