@@ -56,7 +56,6 @@ export type FetchReadingRecordResponseDto = {
 export type UpdateReadingRecordDto = {
   title: string;
   author: string | null;
-  bookImage?: string | null | undefined;
   learnedContent: string | null;
   impression: string | null;
 };
