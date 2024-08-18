@@ -7,7 +7,7 @@ import { ValidationErrors } from '@/components/molecules/ValidationErrors';
 import { useSignUpContext } from '../../../contexts/SignUpContext';
 import { PhaseType } from '../../../types';
 import { ValidateSignUpResponseDto } from '@/generated/auth/@types';
-import { postValidateSignUp } from '../../../apis/signUpApi';
+import { postValidateSignUp } from '@/apis/authApi';
 
 type Props = {
   togglePhase: (newPhase: PhaseType) => void;

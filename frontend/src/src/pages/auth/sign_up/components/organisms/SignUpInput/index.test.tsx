@@ -13,7 +13,7 @@ const useSignUpContext = vi.hoisted(() =>
       password: 'Passwor1',
       passwordConfirm: 'Passwor1',
     },
-    // updateSignUpInput: vi.fn(),
+    updateSignUpInput: vi.fn(),
   })),
 );
 vi.mock('../../../contexts/SignUpContext', async (importOriginal) => {
@@ -25,8 +25,8 @@ vi.mock('../../../contexts/SignUpContext', async (importOriginal) => {
 });
 
 const postValidateSignUp = vi.hoisted(() => vi.fn(() => ({ errors: {} })));
-vi.mock('../../../apis/signUpApi', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('../../../apis/signUpApi')>();
+vi.mock('@/apis/authApi', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@/apis/authApi')>();
   return {
     ...mod,
     postValidateSignUp,
@@ -71,6 +71,7 @@ describe('pages/auth/sign_up/components/organisms/SignUpInput', () => {
           password: '',
           passwordConfirm: '',
         },
+        updateSignUpInput: vi.fn(),
       });
       postValidateSignUp.mockResolvedValue({
         errors: {

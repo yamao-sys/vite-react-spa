@@ -1,4 +1,4 @@
-import { postSignUp } from '../../../apis/signUpApi';
+import { postSignUp } from '@/apis/authApi';
 import { useSignUpContext } from '../../../contexts/SignUpContext';
 import { PhaseType } from '../../../types';
 import { SignUpBaseLayout } from '../SignUpBaseLayout';
