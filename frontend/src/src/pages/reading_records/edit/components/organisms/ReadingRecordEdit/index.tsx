@@ -5,7 +5,7 @@ import { TextAreaForm } from '@/components/atoms/TextAreaForm';
 import { SubmitButton } from '@/components/molecules/SubmitButton';
 import { NAVIGATION_PAGE } from '@/constants/navigation';
 import { useReadingRecordContext } from '@/contexts/ReadingRecordContext';
-import { UpdateReadingRecordDto } from '@/generated/reading_records/@types';
+import { ReadingRecordDto, UpdateReadingRecordDto } from '@/generated/reading_records/@types';
 import { BookImage } from '@/pages/reading_records/components/atoms/BookImage';
 import { BaseFormLayout } from '@/pages/reading_records/components/organisms/BaseFormLayout';
 import { BaseLayout } from '@/pages/reading_records/components/organisms/BaseLayout';
@@ -26,18 +26,19 @@ export const ReadingRecordEdit = () => {
   if (!targetReadingRecord) throw new Error('Not Found Reading Record');
 
   const [inputReadingRecord, setInputReadingRecord] =
-    useState<UpdateReadingRecordDto>(targetReadingRecord);
+    useState<ReadingRecordDto>(targetReadingRecord);
 
   const updateInputReadingRecord = (params: Partial<UpdateReadingRecordDto>) => {
     setInputReadingRecord({ ...inputReadingRecord, ...params });
   };
 
   const hundleSubmit = async () => {
-    const input = structuredClone(inputReadingRecord);
-    // NOTE: 書籍画像は更新対象外のため除く
-    delete input.bookImage;
-
-    await handleUpdateReadingRecord(targetId, input);
+    await handleUpdateReadingRecord(targetId, {
+      title: inputReadingRecord.title,
+      author: inputReadingRecord.author,
+      learnedContent: inputReadingRecord.learnedContent,
+      impression: inputReadingRecord.impression,
+    });
     setSnackbarState(true);
   };
 
