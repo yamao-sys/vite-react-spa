@@ -6,7 +6,7 @@ on:
       - 'frontend/src/**/*.js'
       - 'frontend/src/**/*.ts'
       - 'frontend/src/**/*.tsx'
-      - 'frontend/src/package.json'
+      - 'frontend/package.json'
 
 jobs:
   eslint:
@@ -24,20 +24,20 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: ./frontend/src
+        working-directory: ./frontend
         run: npm install
 
       - name: Setup reviewdog
         uses: reviewdog/action-setup@v1
 
       - name: Run tsc(type check) with reviewdog
-        run: cd ./frontend/src && npm run tsc | reviewdog -reporter=github-pr-review -f=tsc -filter-mode=nofilter -fail-on-error
+        run: cd ./frontend && npm run tsc | reviewdog -reporter=github-pr-review -f=tsc -filter-mode=nofilter -fail-on-error
         shell: bash
 
       - name: Run prettier
-        run: cd ./frontend/src && npm run lint:prettier
+        run: cd ./frontend && npm run lint:prettier
         shell: bash
 
       - name: Run eslint with reviewdog
-        run: cd ./frontend/src && npm run lint | reviewdog -reporter=github-pr-review -f=eslint -filter-mode=nofilter -fail-on-error
+        run: cd ./frontend && npm run lint | reviewdog -reporter=github-pr-review -f=eslint -filter-mode=nofilter -fail-on-error
         shell: bash
